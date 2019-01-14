@@ -7,6 +7,7 @@ type Tileset struct {
 	Text         string   `xml:",chardata"`
 	Version      string   `xml:"version,attr"`
 	Tiledversion string   `xml:"tiledversion,attr"`
+	Source       string   `xml:"source,attr"`
 	Name         string   `xml:"name,attr"`
 	Tilewidth    int      `xml:"tilewidth,attr"`
 	Tileheight   int      `xml:"tileheight,attr"`
@@ -66,19 +67,30 @@ type LayerData struct {
 }
 
 type Objectgroup struct {
-	Text    string `xml:",chardata"`
-	ID      int    `xml:"id,attr"`
-	Name    string `xml:"name,attr"`
-	Objects []struct {
-		Text   string `xml:",chardata"`
-		ID     int    `xml:"id,attr"`
-		Name   string `xml:"name,attr"`
-		Type   string `xml:"type,attr"`
-		X      int    `xml:"x,attr"`
-		Y      int    `xml:"y,attr"`
-		Width  int    `xml:"width,attr"`
-		Height int    `xml:"height,attr"`
-	} `xml:"object"`
+	Text    string   `xml:",chardata"`
+	ID      int      `xml:"id,attr"`
+	Name    string   `xml:"name,attr"`
+	Objects []Object `xml:"object"`
+}
+
+type Object struct {
+	Text       string `xml:",chardata"`
+	ID         int    `xml:"id,attr"`
+	Name       string `xml:"name,attr"`
+	Type       string `xml:"type,attr"`
+	X          int    `xml:"x,attr"`
+	Y          int    `xml:"y,attr"`
+	Width      int    `xml:"width,attr"`
+	Height     int    `xml:"height,attr"`
+	Properties struct {
+		Text     string `xml:",chardata"`
+		Property []struct {
+			Text  string `xml:",chardata"`
+			Name  string `xml:"name,attr"`
+			Type  string `xml:"type,attr"`
+			Value string `xml:"value,attr"`
+		} `xml:"property"`
+	} `xml:"properties"`
 }
 
 // Embedded

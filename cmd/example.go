@@ -7,7 +7,7 @@ import (
 	"image/draw"
 	"log"
 
-	"github.com/kyeett/experiments/tiled"
+	"github.com/kyeett/tiled"
 	"github.com/peterhellberg/gfx"
 	"golang.org/x/image/colornames"
 	"golang.org/x/image/font"
@@ -34,30 +34,37 @@ func main() {
 
 	img := gfx.NewImage(screenWidth, screenHeight, color.Black)
 
-	for _, layer := range worldMap.FilteredLayers("") {
-
+	for _, layer := range worldMap.FilteredLayers() {
+		if layer.Name == "background" {
+			continue
+		}
 		for _, t := range worldMap.LayerTiles(layer) {
-
 			sRect := image.Rect(t.SrcX, t.SrcY, t.SrcX+t.Width, t.SrcY+t.Height)
 			dstRect := image.Rect(t.X, t.Y, screenWidth, screenHeight)
 			draw.Draw(img, dstRect, sImg.SubImage(sRect), image.Pt(t.SrcX, t.SrcY), draw.Over)
 			for _, o := range t.Objectgroup.Objects {
-
-				offX := o.X + t.X
-				offY := o.Y + t.Y
-				switch o.ID {
-				case 0:
-					gfx.DrawImageRectangle(img, image.Rect(offX, offY, offX+o.Width, offY+o.Height), colornames.Palegreen)
-				case 1:
-					gfx.DrawImageRectangle(img, image.Rect(offX, offY, offX+o.Width, offY+o.Height), colornames.Red)
-				default:
-					gfx.DrawImageRectangle(img, image.Rect(offX, offY, offX+o.Width, offY+o.Height), colornames.Pink)
+				for _, p := range o.Properties.Property {
+					fmt.Println(p.Name, p.Value)
 				}
 			}
+
 		}
 	}
 
-	gfx.SavePNG("pico8-palette.png", img)
+	bgImg := gfx.NewImage(screenWidth, screenHeight, color.Black)
+	// Draw background on top of foreground
+	for _, layer := range worldMap.FilteredLayers() {
+		if layer.Name != "background" {
+			continue
+		}
+		for _, t := range worldMap.LayerTiles(layer) {
+			sRect := image.Rect(t.SrcX, t.SrcY, t.SrcX+t.Width, t.SrcY+t.Height)
+			dstRect := image.Rect(t.X, t.Y, screenWidth, screenHeight)
+			draw.Draw(bgImg, dstRect, sImg.SubImage(sRect), image.Pt(t.SrcX, t.SrcY), draw.Over)
+		}
+	}
+
+	gfx.SavePNG("pico8-palette.png", bgImg)
 	fmt.Println("pico8-palette.png")
 }
 
