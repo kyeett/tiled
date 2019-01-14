@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="4">
- <tileset firstgid="1" name="platformer2" tilewidth="16" tileheight="16" tilecount="440" columns="22">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="4">
+ <tileset firstgid="1" name="sunday" tilewidth="16" tileheight="16" tilecount="440" columns="22">
   <image source="../../platformer/assets/tilesheets/platformer2.png" width="352" height="320"/>
-  <tile id="6">
+  <tile id="6" type="Enemy">
    <objectgroup draworder="index">
     <object id="2" x="4" y="4" width="8" height="12"/>
    </objectgroup>
   </tile>
   <tile id="185" type="block">
    <properties>
-    <property name="solid" type="bool" value="false"/>
+    <property name="hakan" value="test"/>
+    <property name="magnus" type="bool" value="false"/>
+    <property name="solid" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
     <object id="2" x="0" y="0" width="16" height="16"/>
@@ -23,7 +25,7 @@
     <object id="2" x="0" y="0" width="16" height="8"/>
    </objectgroup>
   </tile>
-  <tile id="187">
+  <tile id="187" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
@@ -31,16 +33,15 @@
     <object id="3" x="0" y="0" width="16" height="16"/>
    </objectgroup>
   </tile>
-  <tile id="188">
+  <tile id="188" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
     <object id="1" x="0" y="0" width="16" height="8"/>
-    <object id="2" x="0" y="0" width="16" height="8"/>
    </objectgroup>
   </tile>
-  <tile id="207">
+  <tile id="207" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
@@ -48,7 +49,7 @@
     <object id="1" x="0" y="0" width="16" height="16"/>
    </objectgroup>
   </tile>
-  <tile id="208">
+  <tile id="208" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
@@ -56,7 +57,7 @@
     <object id="1" x="0" y="0" width="16" height="8"/>
    </objectgroup>
   </tile>
-  <tile id="209">
+  <tile id="209" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
@@ -64,26 +65,15 @@
     <object id="5" x="0" y="0" width="16" height="16"/>
    </objectgroup>
   </tile>
-  <tile id="210">
+  <tile id="210" type="block">
    <properties>
     <property name="solid" type="bool" value="true"/>
    </properties>
-   <objectgroup draworder="index">
-    <object id="1" x="0" y="0" width="16" height="8"/>
-    <object id="2" x="0" y="0" width="16" height="8"/>
-   </objectgroup>
   </tile>
  </tileset>
- <layer id="4" name="Red Brick layer" width="4" height="4">
-  <properties>
-   <property name="testprop" type="bool" value="true"/>
-  </properties>
+ <layer id="8" name="background" width="4" height="4">
   <data>
-   <tile gid="9"/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="187"/>
    <tile gid="186"/>
    <tile/>
    <tile/>
@@ -95,6 +85,33 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+  </data>
+ </layer>
+ <layer id="4" name="foreground" width="4" height="4">
+  <properties>
+   <property name="testprop" type="bool" value="true"/>
+  </properties>
+  <data>
+   <tile/>
+   <tile/>
+   <tile gid="188"/>
+   <tile gid="188"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="186"/>
+   <tile gid="115"/>
+   <tile/>
+   <tile/>
+   <tile gid="208"/>
+   <tile gid="189"/>
+   <tile gid="209"/>
+   <tile gid="189"/>
+   <tile gid="187"/>
   </data>
  </layer>
  <objectgroup id="5" name="Objs here">
@@ -109,11 +126,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="162"/>
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="162"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
