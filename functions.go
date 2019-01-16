@@ -2,11 +2,11 @@ package tiled
 
 import (
 	"encoding/xml"
-	"fmt"
 	"image"
 	_ "image/png"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -39,7 +39,6 @@ func (m *Map) LoadImage(tilesetIndex int) (image.Image, error) {
 	}
 
 	path := m.data.Tilesets[tilesetIndex].Image.Source
-	fmt.Println(m.data.Tilesets[tilesetIndex].Source)
 	if path == "" {
 		return nil, errors.New("tileset doesn't have an image source, please use LoadTileset()")
 	}
@@ -55,14 +54,18 @@ func (m *Map) LoadImage(tilesetIndex int) (image.Image, error) {
 	return img, nil
 }
 
-func MapFromFile(path string) (*Map, error) {
-	data, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, errors.Errorf("read tmx: %s", err)
+func (m *Map) ImagePath(tilesetIndex int) (string, error) {
+	if tilesetIndex > len(m.data.Tilesets)-1 {
+		return "", errors.Errorf("no tileset with index %d", tilesetIndex)
 	}
 
+	path := m.data.Tilesets[tilesetIndex].Image.Source
+	return path, nil
+}
+
+func MapFromBytes(b []byte, tilesetBytes func(string) ([]byte, error)) (*Map, error) {
 	m := Map{}
-	err = xml.Unmarshal(data, &m.data)
+	err := xml.Unmarshal(b, &m.data)
 	if err != nil {
 		return nil, errors.Errorf("unmarshal xml: %s", err)
 	}
@@ -77,9 +80,9 @@ func MapFromFile(path string) (*Map, error) {
 			return nil, errors.New("tileset is missing source")
 		}
 
-		data, err := ioutil.ReadFile(ts.Source)
+		data, err := tilesetBytes(ts.Source)
 		if err != nil {
-			return nil, errors.Errorf("read tsx: %s", err)
+			return nil, err
 		}
 
 		newTS := Tileset{}
@@ -100,8 +103,34 @@ func MapFromFile(path string) (*Map, error) {
 	for _, t := range ts.Tiles {
 		m.tilemapping[t.ID+ts.Firstgid] = t
 	}
-
 	return &m, nil
+}
+
+func MapFromFile(path string) (*Map, error) {
+	absPath, err := filepath.Abs(path)
+	if err != nil {
+		return nil, err
+	}
+
+	b, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, errors.Errorf("read tmx: %s", err)
+	}
+
+	readFromDisc := func(filename string) ([]byte, error) {
+		data, err := ioutil.ReadFile(filepath.Dir(absPath) + "/" + filename)
+		if err != nil {
+			return nil, errors.Errorf("read tsx: %s", err)
+		}
+		return data, err
+	}
+
+	m, err := MapFromBytes(b, readFromDisc)
+	if err != nil {
+		return nil, err
+	}
+
+	return m, nil
 }
 
 type Map struct {
@@ -188,7 +217,6 @@ func (m *Map) LayerTiles(layer Layer) []TileData {
 			wx, wy := m.data.Tilesets[0].TilesheetCoords(ID)
 			lx, ly := x*m.data.Tilewidth, y*m.data.Tileheight
 
-			// fmt.Println(ID, lx, ly)
 			tiles = append(tiles, TileData{
 				SrcX:        wx,
 				SrcY:        wy,
