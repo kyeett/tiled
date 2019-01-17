@@ -76,20 +76,17 @@ type Objectgroup struct {
 type Object struct {
 	Text       string `xml:",chardata"`
 	ID         int    `xml:"id,attr"`
+	Gid        uint32 `xml:"gid,attr"`
 	Name       string `xml:"name,attr"`
 	Type       string `xml:"type,attr"`
 	X          int    `xml:"x,attr"`
 	Y          int    `xml:"y,attr"`
 	Width      int    `xml:"width,attr"`
 	Height     int    `xml:"height,attr"`
+	Rotation   int    `xml:"rotation,attr"`
 	Properties struct {
-		Text     string `xml:",chardata"`
-		Property []struct {
-			Text  string `xml:",chardata"`
-			Name  string `xml:"name,attr"`
-			Type  string `xml:"type,attr"`
-			Value string `xml:"value,attr"`
-		} `xml:"property"`
+		Text     string     `xml:",chardata"`
+		Property []Property `xml:"property"`
 	} `xml:"properties"`
 }
 

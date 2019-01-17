@@ -4,7 +4,7 @@
  <terraintypes>
   <terrain name="New Terrain" tile="79"/>
  </terraintypes>
- <tile id="6" type="Enemy">
+ <tile id="6" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="false"/>
    <property name="hazard" type="bool" value="true"/>
@@ -14,7 +14,7 @@
    <object id="2" x="4" y="4" width="8" height="12"/>
   </objectgroup>
  </tile>
- <tile id="7">
+ <tile id="7" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="false"/>
    <property name="hazard" type="bool" value="true"/>
@@ -24,14 +24,14 @@
    <object id="1" x="4" y="6" width="8" height="10"/>
   </objectgroup>
  </tile>
- <tile id="8">
+ <tile id="8" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="false"/>
    <property name="hazard" type="bool" value="true"/>
    <property name="killable" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="9">
+ <tile id="9" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="true"/>
    <property name="hazard" type="bool" value="true"/>
@@ -41,21 +41,21 @@
    <object id="12" x="2" y="4" width="12" height="12"/>
   </objectgroup>
  </tile>
- <tile id="10">
+ <tile id="10" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="true"/>
    <property name="hazard" type="bool" value="true"/>
    <property name="killable" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="11">
+ <tile id="11" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="true"/>
    <property name="hazard" type="bool" value="true"/>
    <property name="killable" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="12">
+ <tile id="12" type="enemy">
   <properties>
    <property name="bouncy" type="bool" value="true"/>
    <property name="hazard" type="bool" value="true"/>
@@ -87,6 +87,13 @@
    <object id="1" x="0" y="0" width="16" height="16"/>
   </objectgroup>
  </tile>
+ <tile id="32" type="enemy"/>
+ <tile id="33" type="enemy"/>
+ <tile id="34" type="enemy"/>
+ <tile id="35" type="enemy"/>
+ <tile id="36" type="enemy"/>
+ <tile id="37" type="enemy"/>
+ <tile id="38" type="enemy"/>
  <tile id="39">
   <objectgroup draworder="index">
    <object id="1" x="4" y="0">
@@ -120,6 +127,13 @@
    <object id="5" x="7" y="0" width="2" height="16"/>
   </objectgroup>
  </tile>
+ <tile id="58" type="enemy"/>
+ <tile id="59" type="enemy"/>
+ <tile id="60" type="enemy"/>
+ <tile id="61" type="enemy"/>
+ <tile id="62" type="enemy"/>
+ <tile id="63" type="enemy"/>
+ <tile id="64" type="enemy"/>
  <tile id="72">
   <objectgroup draworder="index">
    <object id="5" x="0" y="0" width="16" height="2"/>
@@ -140,6 +154,21 @@
    <object id="1" x="14" y="0" width="2" height="16"/>
   </objectgroup>
  </tile>
+ <tile id="76" type="hitbox">
+  <objectgroup draworder="index">
+   <object id="2" x="14" y="0" width="2" height="16">
+    <properties>
+     <property name="target" value="monster"/>
+    </properties>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="84" type="enemy"/>
+ <tile id="85" type="enemy"/>
+ <tile id="86" type="enemy"/>
+ <tile id="87" type="enemy"/>
+ <tile id="88" type="enemy"/>
+ <tile id="89" type="enemy"/>
  <tile id="91">
   <objectgroup draworder="index">
    <object id="1" type="hitbox" x="0" y="0" width="16" height="8">
@@ -170,6 +199,12 @@
    </object>
   </objectgroup>
  </tile>
+ <tile id="110" type="enemy"/>
+ <tile id="111" type="enemy"/>
+ <tile id="112" type="enemy"/>
+ <tile id="113" type="enemy"/>
+ <tile id="114" type="enemy"/>
+ <tile id="115" type="enemy"/>
  <tile id="117">
   <objectgroup draworder="index">
    <object id="1" type="hitbox" x="0" y="0" width="16" height="8">
@@ -225,8 +260,6 @@
  <tile id="210" type="block"/>
  <tile id="217">
   <properties>
-   <property name="hakan" value="test"/>
-   <property name="magnus" type="bool" value="false"/>
    <property name="solid" type="bool" value="true"/>
   </properties>
   <objectgroup draworder="index">

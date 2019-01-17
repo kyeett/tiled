@@ -204,6 +204,17 @@ func (m *Map) ObjectGroups() []Objectgroup {
 
 }
 
+func (m *Map) TileData(ID int) TileData {
+	wx, wy := m.data.Tilesets[0].TilesheetCoords(ID)
+	return TileData{
+		SrcX:        wx,
+		SrcY:        wy,
+		Width:       m.data.Tilewidth,
+		Height:      m.data.Tileheight,
+		TilesetTile: m.tilemapping[ID],
+	}
+}
+
 func (m *Map) LayerTiles(layer Layer) []TileData {
 	var tiles []TileData
 
@@ -214,20 +225,13 @@ func (m *Map) LayerTiles(layer Layer) []TileData {
 				continue
 			}
 
-			wx, wy := m.data.Tilesets[0].TilesheetCoords(ID)
 			lx, ly := x*m.data.Tilewidth, y*m.data.Tileheight
 
-			tiles = append(tiles, TileData{
-				SrcX:        wx,
-				SrcY:        wy,
-				GridX:       x,
-				GridY:       y,
-				X:           lx,
-				Y:           ly,
-				Width:       m.data.Tilewidth,
-				Height:      m.data.Tileheight,
-				TilesetTile: m.tilemapping[ID],
-			})
+			t := m.TileData(ID)
+			t.Y = ly
+			t.X = lx
+
+			tiles = append(tiles, t)
 		}
 	}
 	return tiles

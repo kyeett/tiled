@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="38" nextobjectid="13">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="right-down" width="30" height="12" tilewidth="16" tileheight="16" infinite="0" nextlayerid="40" nextobjectid="33">
  <tileset firstgid="1" source="platformer4.tsx"/>
  <layer id="32" name="background" width="30" height="12">
   <data>
@@ -937,8 +937,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="206"/>
+   <tile gid="207"/>
    <tile gid="246"/>
    <tile/>
    <tile/>
@@ -967,8 +967,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="232"/>
+   <tile gid="233"/>
    <tile gid="246"/>
    <tile/>
    <tile/>
@@ -997,8 +997,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="258"/>
+   <tile gid="259"/>
    <tile gid="246"/>
    <tile/>
    <tile gid="218"/>
@@ -1093,7 +1093,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="35" name="enemies" width="30" height="12">
+ <layer id="39" name="infront_of_blocks" width="30" height="12">
   <data>
    <tile/>
    <tile/>
@@ -1125,6 +1125,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="205"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1154,6 +1155,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="231"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1249,7 +1251,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="10"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1284,7 +1285,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="10"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1343,6 +1343,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="205"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1372,8 +1373,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="231"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1457,7 +1457,25 @@
    <tile/>
   </data>
  </layer>
- <layer id="36" name="foreground" width="30" height="12">
+ <objectgroup id="38" name="enemies">
+  <object id="16" gid="10" x="128" y="112" width="16" height="16">
+   <properties>
+    <property name="velocity" value="-0.8,0"/>
+   </properties>
+  </object>
+  <object id="20" gid="77" x="32" y="96" width="16" height="16"/>
+  <object id="21" gid="77" x="67" y="96" width="16" height="16"/>
+  <object id="25" gid="77" x="80" y="112" width="16" height="16"/>
+  <object id="26" gid="77" x="146" y="112" width="16" height="16"/>
+  <object id="27" gid="7" x="176" y="48" width="16" height="16">
+   <properties>
+    <property name="velocity" value="-1,0"/>
+   </properties>
+  </object>
+  <object id="28" gid="77" x="96" y="48" width="16" height="16"/>
+  <object id="29" gid="77" x="224" y="48" width="16" height="16"/>
+ </objectgroup>
+ <layer id="36" name="foreground" width="30" height="12" visible="0">
   <data>
    <tile/>
    <tile/>
@@ -1830,13 +1848,13 @@
   </object>
  </objectgroup>
  <objectgroup id="19" name="teleports">
-  <object id="6" name="tp1" type="teleport" x="141" y="134" width="1" height="25">
+  <object id="6" name="tp1" type="teleport" x="140" y="134" width="1" height="25">
    <properties>
     <property name="dx" type="int" value="-28"/>
     <property name="target" value="tp2"/>
    </properties>
   </object>
-  <object id="7" name="tp2" type="teleport" x="2" y="22" width="1" height="25">
+  <object id="7" name="tp2" type="teleport" x="3" y="21" width="1" height="25">
    <properties>
     <property name="dx" type="int" value="1"/>
     <property name="target" value="tp1"/>
@@ -1846,7 +1864,7 @@
    <polygon points="0,0 -130,-112.643 -129.015,-114"/>
   </object>
  </objectgroup>
- <layer id="37" name="hitboxes" width="30" height="12" opacity="0.5">
+ <layer id="37" name="hitboxes" width="30" height="12" visible="0" opacity="0.5">
   <properties>
    <property name="testprop" type="bool" value="true"/>
   </properties>
